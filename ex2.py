@@ -1,5 +1,5 @@
 import random
-import Ex1
+from Ex1 import euclide_etendu, exponentiation_modulaire_rapide
 
 def miller_rabin(n, k=100):
     if n % 2 == 0:
@@ -17,17 +17,17 @@ def miller_rabin(n, k=100):
     
     for _ in range(k):
         a = random.randint(2, n - 1)
-        g, _,_ = Ex1.euclide_etendu(n, a)
+        g, _,_ = euclide_etendu(n, a)
         if g != 1:
             return (False, g)
         
-        p = Ex1.exponentiation_modulaire_rapide(a, d, n)
+        p = exponentiation_modulaire_rapide(a, d, n)
         if p != 1:
             b1 = True
             j = 0
             while b1 and j <= m - 1:
                 b1 = p != n - 1
-                p = Ex1.exponentiation_modulaire_rapide(p, 2, n)
+                p = exponentiation_modulaire_rapide(p, 2, n)
                 j += 1
             if b1:
                 return (False, a)
@@ -67,4 +67,4 @@ def generate_prime(k, i_max=10000):
 # Génération d'un nombre premier de 1024 bits
 k = 1024
 prime_k_bits = generate_prime(k)
-print(f"Nombre premier de {k} bits généré : {prime_k_bits}")
+print(f"Nombre premier de {k} bits généré : {prime_k_bits}\n")
