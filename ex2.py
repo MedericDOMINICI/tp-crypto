@@ -1,11 +1,13 @@
 import random
 from Ex1 import euclide_etendu, exponentiation_modulaire_rapide
 
+# Algorithme de Miller-Rabin
 def miller_rabin(n, k=100):
     if n % 2 == 0:
         if n == 2:
             return (True, -1)
-        return (False, 2)
+        else:
+            return (False, 2)
     
     m = -1
     q = n - 1
@@ -15,7 +17,7 @@ def miller_rabin(n, k=100):
         q, r = q // 2, q % 2
         m += 1
     
-    for _ in range(k):
+    for i in range(k):
         a = random.randint(2, n - 1)
         g, _,_ = euclide_etendu(n, a)
         if g != 1:
@@ -52,19 +54,18 @@ if est_premier:
 else:
     print(f"Le nombre {p} est composite. Témoin de composition : {tem}.")
     
-def generate_prime(k, i_max=10000):
+def generer_premier(k, i_max=10000):
     i = 0
-    while i < i_max:
-        p = random.randint(2**(k-1), 2**k - 1)  # Générer un nombre k-bit
-        if p % 2 == 0:  # S'assurer qu'il est impair
+    while i < i_max: # Nombre d'essai maximum
+        p = random.randint(2**(k-1), 2**k - 1)  # Generation aléatoire d'un nombre de k-bits
+        if p % 2 == 0:  # On s'assure qu'il est impair
             p += 1
-        is_prime, _ = miller_rabin(p)
-        if is_prime:
+        est_premier, _ = miller_rabin(p)
+        if est_premier:
             return p
         i += 1
     raise RuntimeError(f"Aucun nombre premier trouvé après {i_max} tentatives.")
 
-# Génération d'un nombre premier de 1024 bits
 k = 1024
-prime_k_bits = generate_prime(k)
-print(f"Nombre premier de {k} bits généré : {prime_k_bits}\n")
+premier_a_k_bits = generer_premier(k)
+print(f"Nombre premier de {k} bits généré : {premier_a_k_bits}\n")

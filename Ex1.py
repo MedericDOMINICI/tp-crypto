@@ -19,7 +19,8 @@ def euclide_etendu(a, b):
 
             b_p = a_p
             a_p = r
-
+            
+            # On utilise deux variables temporaires pour faire le calcul des nouveaux u' et v' correctement
             u_temp = u
             v_temp = v
 

@@ -40,7 +40,6 @@ def calculer_pi_de_n_et_n_sur_log_n(n):
 
 def calculer_erreur_estimation(n):
     x, l, ln_x = calculer_pi_de_n_et_n_sur_log_n(n)
-    print(len(x), len(l), len(ln_x))
     erreur = [(abs(l[n]-ln_x[n]))/l[n] for n in range(1,len(x))]
     erreur.insert(0, 0)
     return x, erreur
@@ -60,4 +59,4 @@ def plot_erreur_estimation(n):
     ax.plot(x, erreur)
     plt.show()
 
-plot_erreur_estimation(1000)
+plot_erreur_estimation(100)
